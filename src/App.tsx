@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
 import MyPage from './components/Mypage';
+import Center from './components/Center';
+import Register from './components/Register';
 
 function App() {
   return (
@@ -9,6 +11,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/center" element={<Center />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
