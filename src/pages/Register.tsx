@@ -8,7 +8,8 @@ const Register = () => {
 
     const [title, setTitle] = useState<string>('');
     const [expire, setExpire] = useState<string>('');
-    const [count, setCount] = useState<string>('');
+    const [count, setCount] = useState<number>(0);
+    const [position, setPosition] = useState<number>(0);
 
     const onClickLogin = async () => {
 
@@ -24,11 +25,24 @@ const Register = () => {
             return;
         }
 
-        if (count === '') {
+        if (!count) {
             alert('수량을 입력해주세요!');
-            setCount('');
+            setCount(0);
             return;
         }
+
+        if (!position) {
+            alert('보관 위치를 번호로 입력해주세요!');
+            setCount(0);
+            return;
+        }
+
+        if (position >= 5) {
+            alert('보관 위치를 번호로 입력해주세요!');
+            setCount(0);
+            return;
+        }
+
 
         // API 호출
         try {
@@ -85,7 +99,19 @@ const Register = () => {
                             type="number"
                             id="count"
                             className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                            onChange={(e) => setCount(e.target.value)}
+                            onChange={(e) => setCount(parseInt(e.target.value))}
+                        />
+                        <label
+                            htmlFor="count"
+                            className="font-semibold text-sm text-gray-600 pb-1 block">
+                            보관 위치
+                        </label>
+                        <input
+                            type="number"
+                            id="count"
+                            className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                            onChange={(e) => setCount(parseInt(e.target.value))}
+                            max="4"
                         />
                         <button
                             type="button"
