@@ -7,9 +7,10 @@ const Register = () => {
     const navigate = useNavigate();
 
     const [title, setTitle] = useState<string>('');
-    const [expire, setExpire] = useState<string>('');
+    const [expireDate, setExpireDate] = useState<string>('');
     const [count, setCount] = useState<number>(0);
     const [position, setPosition] = useState<number>(0);
+    const [memo, setMemo] = useState<string>('');
 
     const onClickLogin = async () => {
 
@@ -19,9 +20,9 @@ const Register = () => {
             return;
         }
 
-        if (expire === '') {
+        if (expireDate === '') {
             alert('유통기한을 입력해주세요!');
-            setExpire('');
+            setExpireDate('');
             return;
         }
 
@@ -38,7 +39,7 @@ const Register = () => {
         }
 
         if (position >= 5) {
-            alert('보관 위치를 번호로 입력해주세요!');
+            alert('보관 위치는 1~4 중에서 입력해주세요!');
             setCount(0);
             return;
         }
@@ -46,15 +47,19 @@ const Register = () => {
 
         // API 호출
         try {
-            /*const response = await axios.post(
-                `${process.env.REACT_APP_BASE_URL}/user/login`,
-                { id, password },
+            const response = await axios.post(
+                `${process.env.REACT_APP_BASE_URL}/fridge/create`,
+                {
+                    title,
+                    expire_date: expireDate,
+                    memo,
+                    count,
+                    position
+                },
                 { withCredentials: true }
             );
-            console.log('response', response);
-*/
-            // 성공하면 해당 유저의 아이디 환영 메시지를 띄운다.
-            navigate('/mypage');
+
+            navigate('/center');
 
         } catch (err) {
             console.log(err);
@@ -88,7 +93,7 @@ const Register = () => {
                             type="date"
                             id="expire"
                             className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                            onChange={(e) => setExpire(e.target.value)}
+                            onChange={(e) => setExpireDate(e.target.value)}
                         />
                         <label
                             htmlFor="count"
@@ -110,8 +115,19 @@ const Register = () => {
                             type="number"
                             id="count"
                             className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                            onChange={(e) => setCount(parseInt(e.target.value))}
+                            onChange={(e) => setPosition(parseInt(e.target.value))}
                             max="4"
+                        />
+                        <label
+                            htmlFor="memo"
+                            className="font-semibold text-sm text-gray-600 pb-1 block">
+                            메모
+                        </label>
+                        <input
+                            type="string"
+                            id="memo"
+                            className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+                            onChange={(e) => setMemo(e.target.value)}
                         />
                         <button
                             type="button"
