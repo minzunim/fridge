@@ -49,16 +49,16 @@ const Center = () => {
     return (
         <Layout>
             <div className="grid grid-cols-2 gap-4 h-screen mx-3">
-                {list[0].list.map((item, index) => {
-                    return (
-                        <div className="box-border border-4 rounded-lg">
-                            <li>{item.title}</li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </div>
-                    );
-                })}
+                {/* {list[0].list.map((item, index) => {
+                return (
+                    <div className="box-border border-4 rounded-lg">
+                        <li>{item.title}</li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </div>
+                );
+            })}
                 <div className="box-border border-4 rounded-lg">
                     <li></li>
                     <li></li>
@@ -82,7 +82,7 @@ const Center = () => {
                     <li></li>
                     <li></li>
                     <li></li>
-                </div>
+                </div> */}
 
             </div>
         </Layout>

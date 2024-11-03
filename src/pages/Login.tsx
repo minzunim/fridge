@@ -31,8 +31,15 @@ const Login = () => {
             );
             console.log('response', response);
 
-            // 성공하면 해당 유저의 아이디 환영 메시지를 띄운다.
-            navigate('/mypage');
+            const data = response.data.data;
+
+            if (response.data.code === 200) {
+                console.log(data.accessToken);
+                localStorage.setItem("fridge_access", data.accessToken);
+                navigate('/center');
+            } else {
+                alert("아이디 또는 비밀번호를 확인해주세요!");
+            }
 
         } catch (err) {
             console.log(err);
