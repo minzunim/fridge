@@ -1,19 +1,22 @@
 import { useLocation } from "react-router-dom";
-import SubHeader from "../components/common/subHeader";
 import Layout from "../components/Layout/Layout";
+import SubHeader from "../components/common/SubHeader";
+import Center from "../components/Center";
 
 const Compartment = () => {
 
     const query = useLocation();
+    const first_position: number = parseInt(query.search.split("first_position=")[1]);
 
     console.log('query', query);
 
     return (
         <Layout>
-            <div>1번 칸</div>
             <SubHeader
-
+                first_position={first_position}
             />
+            <Center />
+
         </Layout>
     );
 };

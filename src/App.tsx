@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login';
 import MyPage from './pages/Mypage';
-import Center from './pages/Center';
+import Center from './pages/Center2';
 import Register from './pages/Register';
 import Gate from './pages/Gate';
 import Compartment from './pages/Compartment';
