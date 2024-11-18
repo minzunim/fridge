@@ -4,7 +4,6 @@ interface SubHeaderPropsType {
     first_position: number;
 }
 
-
 const SubHeader = ({ first_position }: SubHeaderPropsType) => {
     return (
         <div className="px-2 py-3 flex border-solid border-2">

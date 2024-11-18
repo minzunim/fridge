@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
+import Compart from "../components/common/Compart";
 import SubHeader from "../components/common/SubHeader";
-import Center from "../components/Center";
 
 const Compartment = () => {
 
@@ -15,8 +15,7 @@ const Compartment = () => {
             <SubHeader
                 first_position={first_position}
             />
-            <Center />
-
+            <Compart />
         </Layout>
     );
 };
