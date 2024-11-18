@@ -4,7 +4,7 @@ import Header from "./Header";
 const Layout = (props: { children: React.ReactNode; }) => {
 
     return (
-        <div>
+        <div className="h-screen">
             <Header />
 
             <main>
