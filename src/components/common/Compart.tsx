@@ -48,6 +48,7 @@ const Compart = () => {
                     itemList.map((item, idx) => (
                         <ItemBox
                             key={idx}
+                            product_no={item.idx}
                             title={item.title}
                             expire_date={item.expire_date}
                         />
