@@ -6,7 +6,9 @@ import ItemDetail from "../components/common/ItemDetail";
 const Register = () => {
 
     return (
-        <ItemDetail />
+        <ItemDetail
+            isModal={false}
+        />
     );
 };
 

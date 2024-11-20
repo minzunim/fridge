@@ -86,14 +86,19 @@ export const ItemBox = ({ product_no, title, expire_date }: Iprops) => {
                                 }
                             }}>
                         </div>
-                        <div className="w-4/5 h-1/2
+                        <div className="w-4/5 h-3/4
                                     border rounded-md
                                     bg-white
                                     text-black
                                     fixed left-1/2 -translate-x-1/2
-                                    z-50"
+                                    z-50
+                                    max-h-[calc(100vh-200px)]
+                                    overflow-auto"
                         >
-                            <ItemDetail />
+                            <ItemDetail
+                                isModal={true}
+                                product_no={product_no}
+                            />
                         </div>
                     </>
                 )
