@@ -87,10 +87,7 @@ const ItemDetail = ({ isModal, product_no }: ItemDetail) => {
             `${process.env.REACT_APP_BASE_URL}/fridge/detail/${product_no}`,
         ).then((res) => {
 
-            console.log(res);
-
             const data = res.data.data;
-            console.log(data.title);
 
             setTitle(data.title);
             setExpireDate(data.expire_date);

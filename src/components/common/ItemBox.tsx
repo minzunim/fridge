@@ -3,6 +3,7 @@ import moment from "moment";
 import { useEffect, useRef, useState } from "react";
 import ItemDetail from "./ItemDetail";
 
+
 interface Iprops {
     product_no: number;
     title: string;
@@ -66,10 +67,12 @@ export const ItemBox = ({ product_no, title, expire_date }: Iprops) => {
                             flex items-center justify-center
                             absolute top-0 right-0 -translate-y-1/2 translate-x-1/2
                             text-white font-bold"
-                    onClick={e => onClickDeleteHandler(product_no)}>
+                    onClick={e => {
+                        e.stopPropagation();
+                        onClickDeleteHandler(product_no);
+                    }}>
                     &times;</div>
             </div>
-
             {
                 modalOpen && (
                     <>
