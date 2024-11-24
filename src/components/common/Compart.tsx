@@ -82,40 +82,45 @@ const Compart = () => {
 
     return (
         <div className="h-[calc(80vh-40px)]
-            flex items-baseline
+            flex items-baseline bg-slate-300 justify-start  
         ">
             {/* 왼쪽 화살표 */}
-            <IoIosArrowDropleftCircle
-                className="
+            {(position === 2 || position === 3 || position === 5 || position === 6) &&
+                <IoIosArrowDropleftCircle
+                    className="
                     w-9 h-9
                     text-slate-400
                     m-auto
                 "
-                onClick={(e) => {
-                    setArrow('left');
-                }}
-            />
-            <div className="flex flex-wrap w-full">
-                {
-                    itemList.map((item, idx) => (
-                        <ItemBox
-                            key={idx}
-                            product_no={item.idx}
-                            title={item.title}
-                            expire_date={item.expire_date}
-                        />
-                    ))
-                }
+                    onClick={(e) => {
+                        setArrow('left');
+                    }}
+                />}
+            <div className="bg-slate-300 h-[calc(80vh-40px)] w-full p-4">
+                <div className="flex flex-wrap content-start w-full h-full bg-slate-200 rounded-md">
+                    {
+                        itemList.map((item, idx) => (
+                            <ItemBox
+                                key={idx}
+                                product_no={item.idx}
+                                title={item.title}
+                                expire_date={item.expire_date}
+                            />
+                        ))
+                    }
+                </div>
             </div>
             {/* 오른쪽 화살표 */}
-            <IoIosArrowDroprightCircle
-                className="
+            {(position === 1 || position === 2 || position === 4 || position === 5) &&
+                <IoIosArrowDroprightCircle
+                    className="
                     w-9 h-9
                     text-slate-400
                     m-auto
                 "
-                onClick={() => setArrow('right')} />
-        </div >
+                    onClick={() => setArrow('right')} />
+            }
+        </div>
     );
 };
 

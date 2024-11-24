@@ -100,6 +100,7 @@ export const ItemBox = ({ product_no, title, expire_date }: Iprops) => {
                         >
                             <ItemDetail
                                 isModal={true}
+                                setModalOpen={setModalOpen}
                                 product_no={product_no}
                             />
                         </div>

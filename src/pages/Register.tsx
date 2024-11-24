@@ -5,9 +5,12 @@ import ItemDetail from "../components/common/ItemDetail";
 
 const Register = () => {
 
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
+
     return (
         <ItemDetail
             isModal={false}
+            setModalOpen={setModalOpen}
         />
     );
 };
