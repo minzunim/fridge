@@ -34,18 +34,18 @@ export const ItemBox = ({ product_no, title, expire_date }: Iprops) => {
 
     // 상품 삭제 API
     const onClickDeleteHandler = async (product_no: number) => {
-        await axios.put(
-            `${process.env.REACT_APP_BASE_URL}/fridge/delete/${product_no}`,
-        ).then((res) => {
-            if (window.confirm("아이템을 삭제하시겠습니까?")) {
+
+        if (window.confirm("아이템을 삭제하시겠습니까?")) {
+            await axios.put(
+                `${process.env.REACT_APP_BASE_URL}/fridge/delete/${product_no}`,
+            ).then((res) => {
                 alert(res.data.msg);
                 window.location.reload();
-            }
-            return;
 
-        }).catch((err) => {
-            console.log(err);
-        });
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
     };
 
     return (
@@ -59,14 +59,19 @@ export const ItemBox = ({ product_no, title, expire_date }: Iprops) => {
                 onClick={() => setModalOpen(true)}>
                 {title}
 
+                {/* 아이템 삭제 x 버튼 */}
                 <div className="border rounded-full
                             border-none
                             bg-slate-400
                             w-5 h-5          
                             flex items-center justify-center
                             absolute top-0 right-0 -translate-y-1/2 translate-x-1/2
-                            text-white font-bold"
-                    onClick={e => onClickDeleteHandler(product_no)}>
+                            text-white font-bold
+                            "
+                    onClick={e => {
+                        // e.stopPropagation();
+                        onClickDeleteHandler(product_no);
+                    }}>
                     &times;</div>
             </div>
 
