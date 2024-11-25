@@ -109,7 +109,7 @@ const ItemDetail = ({ setModalOpen, isModal, product_no }: ItemDetail) => {
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
-            <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
+            <div className="xs:p-0 mx-auto md:w-full md:max-w-md">
                 <h1 className="font-bold text-center text-xl mb-5">
                     {isModal ? '음식 정보 수정하기' : '음식을 추가해보세요!'}
                 </h1>
@@ -184,7 +184,9 @@ const ItemDetail = ({ setModalOpen, isModal, product_no }: ItemDetail) => {
                             <button
                                 type="button"
                                 className="transition duration-200 bg-slate-400 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
-                                onClick={() => setModalOpen(false)}
+                                onClick={() =>
+                                    `${isModal ? setModalOpen(false) : navigate(-1)}`
+                                }
                             >
                                 <span className="inline-block mr-2">취소</span>
                             </button>

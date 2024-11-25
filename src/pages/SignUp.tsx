@@ -1,15 +1,15 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../config/supabase";
 
-const Login = () => {
+const SignUp = () => {
+
     const navigate = useNavigate();
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    const onClickLogin = async () => {
+    const onClickSignUp = async () => {
 
         if (email === '') {
             alert('이메일을 입력해주세요!');
@@ -23,24 +23,31 @@ const Login = () => {
             return;
         }
 
-
-        await supabase.auth.signInWithPassword({
+        // API 호출
+        const { data, error } = await supabase.auth.signUp({
             email,
             password,
-        }).then(() => {
-            alert('로그인 성공!!');
-            navigate('/gate');
-        }).catch((error) => {
-            console.log(error);
-            return;
         });
-    };
 
+        if (error) {
+            alert('회원가입 실패에 실패했습니다. 관리자에게 문의해주세요');
+            return;
+        }
+
+        const userData = await supabase.from("user").insert({
+            id: data.user?.id, // 회원가입 성공 시 받아온 data중 id(uid) 값을 가져온다.
+            email: data.user?.email,
+            created_at: data.user?.created_at
+        });
+
+        alert('회원가입을 축하합니다!');
+        navigate('/login');
+    };
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
             <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-                <h1 className="font-bold text-center text-2xl mb-5">My Fridge</h1>
+                <h1 className="font-bold text-center text-2xl mb-5">회원가입</h1>
                 <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
                     <div className="px-5 py-7">
                         <label
@@ -68,8 +75,8 @@ const Login = () => {
                         <button
                             type="button"
                             className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
-                            onClick={onClickLogin}>
-                            <span className="inline-block mr-2">Login</span>
+                            onClick={onClickSignUp}>
+                            <span className="inline-block mr-2">Sign up</span>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 inline-block">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
@@ -113,4 +120,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignUp;

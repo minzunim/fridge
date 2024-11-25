@@ -32,6 +32,9 @@ const Header = () => {
                 <li className='border-gray-300 py-3 px-3'>
                     <Link to="/gate"
                         className="block font-semibold text-[15px]">My Fridge</Link></li>
+                {/* <li className=''>
+                    logout
+                </li> */}
                 <li className='rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 px-3 py-3 shadow-md'>
                     <Link to="/register"
                         className='text-slate-100 font-semibold text-[15px] text-[15px]'

@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
+import { supabase } from "../../config/supabase";
+// import { supabase } from "../../config/supabase";
 
 interface Item {
     idx: number;
@@ -60,20 +62,26 @@ const Compart = () => {
 
         navigate(`/compartment?position=${position}`);
 
-        await axios.get(
-            `${process.env.REACT_APP_BASE_URL}/fridge/list/${position}`,
-        ).then((res) => {
+        let { data: item_list, error } =
+            await supabase
+                .from('product')
+                .select('*')
+                .eq('position', position);
 
-            setItemList(res.data.data);
+        if (error) {
+            throw error;
+        }
+
+        if (item_list) {
+            setItemList(item_list);
             setArrow(undefined);
+        }
 
-        }).catch((err) => {
-            console.log(err);
-        });
     };
 
     useEffect(() => {
         getItemList();
+
     }, []);
 
     useEffect(() => {
@@ -92,7 +100,7 @@ const Compart = () => {
                     text-slate-400
                     m-auto
                 "
-                    onClick={(e) => {
+                    onClick={() => {
                         setArrow('left');
                     }}
                 />}
