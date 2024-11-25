@@ -1,45 +1,49 @@
-import axios from "axios";
 import React, { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface User {
-    id: string; // 사용자 데이터에 맞게 속성 수정
-    // TODO: 필요한 다른 속성 추가
+    email: string;
+    email_verified: boolean;
+    phone_verified: boolean;
+    sub: string;
 }
 
 interface UserContextType {
-    user: User | null;
-    login: (userData: User) => void;
-    logout: () => void;
+    userData: User;
 }
 
 
 export const UserContext = createContext<UserContextType | null>(null);
 
-export function UserProvider({ children }: any) {
+const UserProvider = ({ children }: any) => {
 
-    const [user, setUser] = useState<User | null>(null);
+    const [isLogin, setIsLogin] = useState<boolean>(false);
+    const navigate = useNavigate();
 
-    const login = async () => {
-        try {
-            const response = await axios.post(
-                `${process.env.REACT_APP_BASEURL}/user/login`,
-                { user },
-                { withCredentials: true }
-            );
-            return;
-        } catch (err) {
-            console.log(err);
-            return;
-        }
+    let userData: User = {
+        email: '',
+        email_verified: false,
+        phone_verified: false,
+        sub: ''
     };
 
-    const logout = () => setUser(null);
+    // 로컬 스토리지 확인
+    const authData = localStorage.getItem(process.env.REACT_APP_SUPABASE_TOKEN!);
+    if (!authData) {
+        //setIsLogin(false);
+        navigate('/login');
+    } else {
+        //setIsLogin(true);
+        userData = JSON.parse(authData).user_metadata;
+    }
 
     return (
         <UserContext.Provider
-            value={{ user, login, logout }}
+            value={{ userData }}
         >
             {children}
         </UserContext.Provider>
     );
 };
+
+export default UserProvider;
