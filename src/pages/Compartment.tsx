@@ -6,9 +6,7 @@ import SubHeader from "../components/common/SubHeader";
 const Compartment = () => {
 
     const query = useLocation();
-    const first_position: number = parseInt(query.search.split("first_position=")[1]);
-
-    console.log('query', query);
+    const first_position: number = parseInt(query.search.split("position=")[1]);
 
     return (
         <Layout>

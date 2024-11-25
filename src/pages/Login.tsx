@@ -29,7 +29,6 @@ const Login = () => {
                 { id, password },
                 { withCredentials: true }
             );
-            console.log('response', response);
 
             const data = response.data.data;
 

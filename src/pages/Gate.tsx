@@ -13,7 +13,7 @@ const Gate = () => {
 
     const doors = [
         { isTop: true, position: 2 },
-        { isTop: true, position: 4 }
+        { isTop: true, position: 5 }
     ];
 
     // top, down 이 나눠져 있어야 함
