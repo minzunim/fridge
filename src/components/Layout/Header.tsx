@@ -1,40 +1,31 @@
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/Authcontext";
+import { useContext } from "react";
 
 const Header = () => {
 
+    const userContext = useContext(UserContext);
     const navigate = useNavigate();
 
-    const logout = async () => {
+    if (!userContext) {
+        throw new Error('UserContext must be used within a UserContext.Provider');
+    }
 
-        const isConfirmed = window.confirm("로그아웃하시겠습니까?");
-        if (isConfirmed) {
-            localStorage.removeItem("fridge_access");
-
-            const response = await axios.post(
-                `${process.env.REACT_APP_BASE_URL}/user/logout`,
-                { withCredentials: true }
-            );
-
-            // logout 시 해당 아이디 비밀번호 확인해야 하는지 **
-
-            navigate('/login');
-        } else {
-        }
-
-    };
-
-    const isLogin = localStorage.getItem("fridge_access");
+    const { logout } = userContext;
 
     return (
         <header className='flex shadow-md py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50'>
-            <ul className='flex flex-wrap justify-between w-full'>
+            <ul className='flex flex-wrap justify-between items-baseline w-full'>
                 <li className='border-gray-300 py-3 px-3'>
-                    <Link to="/gate"
-                        className="block font-semibold text-[15px]">My Fridge</Link></li>
-                {/* <li className=''>
+                    <Link to="/"
+                        className="block font-semibold text-[17px]">My Fridge</Link></li>
+                <li className=
+                    'font-semibold text-[15px]'
+                    onClick={logout}
+                >
                     logout
-                </li> */}
+                </li>
                 <li className='rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 px-3 py-3 shadow-md'>
                     <Link to="/register"
                         className='text-slate-100 font-semibold text-[15px] text-[15px]'

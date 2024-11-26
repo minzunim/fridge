@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../config/supabase";
 
 interface User {
     email: string;
@@ -10,6 +11,7 @@ interface User {
 
 interface UserContextType {
     userData: User;
+    logout: () => void;
 }
 
 
@@ -29,17 +31,29 @@ const UserProvider = ({ children }: any) => {
 
     // 로컬 스토리지 확인
     const authData = localStorage.getItem(process.env.REACT_APP_SUPABASE_TOKEN!);
-    if (!authData) {
-        //setIsLogin(false);
+
+    useEffect(() => {
+        if (!authData) {
+            //setIsLogin(false);
+            alert('로그인이 필요합니다.');
+            navigate('/login');
+        } else {
+            //setIsLogin(true);
+            userData = JSON.parse(authData).user_metadata;
+        }
+    }, []);
+
+    // 로그아웃
+    const logout = () => {
+        localStorage.removeItem(process.env.REACT_APP_SUPABASE_TOKEN!);
+        alert('로그아웃 완료');
         navigate('/login');
-    } else {
-        //setIsLogin(true);
-        userData = JSON.parse(authData).user_metadata;
-    }
+        return;
+    };
 
     return (
         <UserContext.Provider
-            value={{ userData }}
+            value={{ userData, logout }}
         >
             {children}
         </UserContext.Provider>

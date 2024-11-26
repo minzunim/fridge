@@ -2,6 +2,7 @@ import axios from "axios";
 import moment from "moment";
 import { useEffect, useRef, useState } from "react";
 import ItemDetail from "./ItemDetail";
+import { supabase } from "../../config/supabase";
 
 
 interface Iprops {
@@ -37,15 +38,13 @@ export const ItemBox = ({ product_no, title, expire_date }: Iprops) => {
     const onClickDeleteHandler = async (product_no: number) => {
 
         if (window.confirm("아이템을 삭제하시겠습니까?")) {
-            await axios.put(
-                `${process.env.REACT_APP_BASE_URL}/fridge/delete/${product_no}`,
-            ).then((res) => {
-                alert(res.data.msg);
-                window.location.reload();
+            const { data, error } = await supabase
+                .from("product")
+                .update({ is_deleted: "Y" })
+                .eq("idx", product_no)
+                .select();
 
-            }).catch((err) => {
-                console.log(err);
-            });
+            window.location.reload();
         }
     };
 

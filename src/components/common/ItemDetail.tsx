@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "../../config/supabase";
 
 interface ItemDetail {
     isModal: boolean; // true: 수정, false: 상세
@@ -50,31 +51,38 @@ const ItemDetail = ({ setModalOpen, isModal, product_no }: ItemDetail) => {
 
             // 모달인 경우 - 수정
             if (isModal) {
-                await axios.post(
-                    `${process.env.REACT_APP_BASE_URL}/fridge/datail/${product_no}`,
-                    {
+
+                console.log('expireDate type:', typeof (expireDate));
+                const { data, error } = await supabase
+                    .from('product')
+                    .update({
                         title,
                         expire_date: expireDate,
                         memo,
                         count,
                         position
-                    },
-                    { withCredentials: true }
-                );
+                    })
+                    .eq("idx", product_no)
+                    .select();
+
+                setModalOpen(false);
+
             } else {
-                await axios.post(
-                    `${process.env.REACT_APP_BASE_URL}/fridge/create`,
-                    {
-                        title,
-                        expire_date: expireDate,
-                        memo,
-                        count,
-                        position
-                    },
-                    { withCredentials: true }
-                );
+                const { data, error } = await supabase
+                    .from('product')
+                    .insert([
+                        {
+                            title,
+                            expire_date: expireDate,
+                            memo,
+                            count,
+                            position
+                        },
+                    ])
+                    .select();
+                navigate(`/compartment?position=${position}`);
             }
-            navigate(`/compartment?position=${position}`);
+
 
         } catch (err) {
             console.log(err);
@@ -84,27 +92,26 @@ const ItemDetail = ({ setModalOpen, isModal, product_no }: ItemDetail) => {
 
     // 개별 아이템 상세 조회
     const getDetailItem = async () => {
-        await axios.get(
-            `${process.env.REACT_APP_BASE_URL}/fridge/detail/${product_no}`,
-        ).then((res) => {
+        let { data: _product, error } = await supabase
+            .from("product")
+            .select("*")
+            .eq("idx", product_no)
+            .eq("is_deleted", "N");
 
-            const data = res.data.data;
-
-            setTitle(data.title);
-            setExpireDate(data.expire_date);
-            setCount(data.count);
-            setPosition(data.position);
-            setMemo(data.memo);
-
-        }).catch((err) => {
-            console.log(err);
-        });
-
+        if (_product) {
+            const product = _product[0];
+            setTitle(product.title);
+            setExpireDate(product.expire_date);
+            setCount(product.count);
+            setPosition(product.position);
+            setMemo(product.memo);
+        }
     };
 
     useEffect(() => {
-        getDetailItem();
-
+        if (isModal) {
+            getDetailItem();
+        }
     }, [isModal]);
 
     return (

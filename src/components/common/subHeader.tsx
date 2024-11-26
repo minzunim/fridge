@@ -12,7 +12,7 @@ const SubHeader = ({ first_position }: SubHeaderPropsType) => {
 
     return (
         <div className="px-2 py-3 flex border-solid border-2">
-            <Link to="/gate"><Refrigerator_icon
+            <Link to="/"><Refrigerator_icon
                 className="flex-initial w-10 size-6"
             >
             </Refrigerator_icon></Link>

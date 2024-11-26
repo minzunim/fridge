@@ -66,7 +66,10 @@ const Compart = () => {
             await supabase
                 .from('product')
                 .select('*')
-                .eq('position', position);
+                .eq('position', position)
+                .eq('is_deleted', 'N');
+
+        console.log("🚀 ~ getItemList ~ item_list:", item_list);
 
         if (error) {
             throw error;

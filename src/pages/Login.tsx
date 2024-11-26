@@ -28,8 +28,8 @@ const Login = () => {
             email,
             password,
         }).then(() => {
-            alert('로그인 성공!!');
-            navigate('/gate');
+            alert('로그인 성공!');
+            navigate('/');
         }).catch((error) => {
             console.log(error);
             return;
