@@ -1,19 +1,16 @@
 import Footer from "./Footer";
 import Header from "./Header";
 
-const Layout = (props: { children: React.ReactNode; }) => {
+const Layout = (props: { children: React.ReactNode }) => {
+  return (
+    <div className="h-screen">
+      <Header />
 
-    return (
-        <div className="h-screen">
-            <Header />
+      <main>{props.children}</main>
 
-            <main>
-                {props.children}
-            </main>
-
-            <Footer />
-        </div>
-    );
+      <Footer />
+    </div>
+  );
 };
 
 export default Layout;

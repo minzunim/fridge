@@ -4,36 +4,36 @@ import { UserContext } from "../../contexts/Authcontext";
 import { useContext } from "react";
 
 const Header = () => {
+  const userContext = useContext(UserContext);
+  const navigate = useNavigate();
 
-    const userContext = useContext(UserContext);
-    const navigate = useNavigate();
+  if (!userContext) {
+    throw new Error("UserContext must be used within a UserContext.Provider");
+  }
 
-    if (!userContext) {
-        throw new Error('UserContext must be used within a UserContext.Provider');
-    }
+  const { logout } = userContext;
 
-    const { logout } = userContext;
-
-    return (
-        <header className='flex shadow-md py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50'>
-            <ul className='flex flex-wrap justify-between items-baseline w-full'>
-                <li className='border-gray-300 py-3 px-3'>
-                    <Link to="/"
-                        className="block font-semibold text-[17px]">My Fridge</Link></li>
-                <li className=
-                    'font-semibold text-[15px]'
-                    onClick={logout}
-                >
-                    logout
-                </li>
-                <li className='rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 px-3 py-3 shadow-md'>
-                    <Link to="/register"
-                        className='text-slate-100 font-semibold text-[15px] text-[15px]'
-                    >+ FOOD
-                    </Link>
-                </li>
-            </ul>
-            {/* <div id="collapseMenu"
+  return (
+    <header className="relative z-50 flex min-h-[70px] bg-white px-4 py-4 font-[sans-serif] tracking-wide shadow-md sm:px-10">
+      <ul className="flex w-full flex-wrap items-baseline justify-between">
+        <li className="border-gray-300 px-3 py-3">
+          <Link to="/" className="block text-[17px] font-semibold">
+            My Fridge
+          </Link>
+        </li>
+        <li className="text-[15px] font-semibold" onClick={logout}>
+          logout
+        </li>
+        <li className="rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 px-3 py-3 shadow-md">
+          <Link
+            to="/register"
+            className="text-[15px] font-semibold text-slate-100"
+          >
+            + FOOD
+          </Link>
+        </li>
+      </ul>
+      {/* <div id="collapseMenu"
                     className='max-lg:hidden lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50'>
                     <button id="toggleClose" className='lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white p-3'>
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-4 fill-black" viewBox="0 0 320.591 320.591">
@@ -61,7 +61,7 @@ const Header = () => {
                     </ul>
                 </div> */}
 
-            {/* <div className='flex max-lg:ml-auto space-x-3'>
+      {/* <div className='flex max-lg:ml-auto space-x-3'>
                     <button
                         className='px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff]'
                         onClick={logout}>
@@ -79,8 +79,8 @@ const Header = () => {
                         </svg>
                     </button>
                 </div> */}
-        </header >
-    );
+    </header>
+  );
 };
 
 export default Header;

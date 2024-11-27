@@ -1,11 +1,11 @@
-import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
-import './App.css';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Gate from './pages/Gate';
-import Compartment from './pages/Compartment';
-import SignUp from './pages/SignUp';
-import UserProvider, { UserContext } from './contexts/Authcontext';
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import "./App.css";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Gate from "./pages/Gate";
+import Compartment from "./pages/Compartment";
+import SignUp from "./pages/SignUp";
+import UserProvider, { UserContext } from "./contexts/Authcontext";
 
 function App() {
   return (
@@ -19,9 +19,8 @@ function App() {
           <Route path="/compartment" element={<Compartment />} />
         </Routes>
       </UserProvider>
-    </BrowserRouter >
+    </BrowserRouter>
   );
-};
-
+}
 
 export default App;
