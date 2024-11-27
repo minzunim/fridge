@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../config/supabase";
 
 const Login = () => {
@@ -90,53 +90,31 @@ const Login = () => {
             </button>
           </div>
           <div className="py-5">
-            <div className="grid grid-cols-2 gap-1">
-              <div className="whitespace-nowrap text-center sm:text-left">
-                <button className="mx-5 cursor-pointer rounded-lg px-5 py-4 text-sm font-normal text-gray-500 ring-inset transition duration-200 hover:bg-gray-100 focus:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    className="inline-block h-4 w-4 align-text-top"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"
-                    />
-                  </svg>
-                  <span className="ml-1 inline-block">Forgot Password</span>
-                </button>
-              </div>
-              <div className="whitespace-nowrap text-center sm:text-right">
-                <button className="mx-5 cursor-pointer rounded-lg px-5 py-4 text-sm font-normal text-gray-500 ring-inset transition duration-200 hover:bg-gray-100 focus:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    className="inline-block h-4 w-4 align-text-bottom"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
-                    />
-                  </svg>
-                  <span className="ml-1 inline-block">Help</span>
-                </button>
-              </div>
+            <div className="grid grid-cols-2 gap-1 pl-5">
+              <Link to="/signup"><span className="ml-1 inline-block text-sm">회원 가입하기</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="inline-block h-4 w-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+              </Link>
             </div>
           </div>
         </div>
         <div className="py-5">
-          <div className="grid grid-cols-2 gap-1">
+          {/* <div className="grid grid-cols-2 gap-1">
             <div className="whitespace-nowrap text-center sm:text-left">
               <button className="mx-5 cursor-pointer rounded-lg px-5 py-4 text-sm font-normal text-gray-500 ring-inset transition duration-200 hover:bg-gray-200 focus:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50">
-                <svg
+                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -153,7 +131,7 @@ const Login = () => {
                 <span className="ml-1 inline-block">Back to your-app.com</span>
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
