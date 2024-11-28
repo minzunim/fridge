@@ -29,6 +29,12 @@ const UserProvider = ({ children }: any) => {
 
     // 로컬 스토리지 확인
     const authData = localStorage.getItem(process.env.REACT_APP_SUPABASE_TOKEN!);
+    console.log("🚀 ~ UserProvider ~ authData:", authData);
+
+    const getUserData = async () => {
+        const userData = await supabase.auth.getSession();
+        return userData;
+    };
 
     useEffect(() => {
         if (!authData) {
@@ -38,6 +44,10 @@ const UserProvider = ({ children }: any) => {
             //setIsLogin(true);
             userData = JSON.parse(authData).user_metadata;
         }
+
+        const data = getUserData();
+        console.log('getUserSession', data);
+
     }, []);
 
     // 로그아웃
